@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/schoolmanager-apidbserver/databases/SchoolManager.API_db",
+      "type": "mssql.azure",
+      "connectionId": "schoolmanager",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
