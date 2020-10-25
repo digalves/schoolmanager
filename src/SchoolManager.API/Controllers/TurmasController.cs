@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Core.Business.Interfaces;
@@ -34,10 +35,10 @@ namespace SchoolManager.API.Controllers
             return CustomResponse(_mapper.Map<TurmaResponseViewModel>(response));
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<TurmaResponseViewModel>> ListarTodas()
+        [HttpGet("{escolaId:guid}")]
+        public async Task<IEnumerable<TurmaResponseViewModel>> ListarTodasPorEscola(Guid escolaId)
         {
-            return _mapper.Map<IEnumerable<TurmaResponseViewModel>>(await _turmaRepository.ObterTodas());
+            return _mapper.Map<IEnumerable<TurmaResponseViewModel>>(await _turmaRepository.ObterTurmasEscola(escolaId));
         }
     }
 }

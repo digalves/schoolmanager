@@ -14,7 +14,7 @@ namespace SchoolManager.Data.Repositories
         {
         }
 
-        public async Task<ICollection<Escola>> ObterEscolasTurmas()
+        public async Task<IEnumerable<Escola>> ObterEscolasTurmas()
         {
             return await DbContext.Escolas.AsNoTracking()
                 .Include(p => p.Turmas).ToListAsync();

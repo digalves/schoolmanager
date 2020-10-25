@@ -4,6 +4,8 @@ using SchoolManager.Business.Interfaces;
 using SchoolManager.Business.Models;
 using SchoolManager.Data.Context;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SchoolManager.Data.Repositories
@@ -14,11 +16,22 @@ namespace SchoolManager.Data.Repositories
         {
         }
 
-        public Task<Turma> ObterTurmaEscola(Guid id)
+        public async Task<Turma> ObterTurmaEscola(Guid id)
         {
-            return DbContext.Turmas.AsNoTracking()
+            return await DbContext.Turmas
+               .Include(s => s.Escola)
+               .Where(p => p.EscolaId == id)
+               .AsNoTracking()
+               .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Turma>> ObterTurmasEscola(Guid id)
+        {
+            return await DbContext.Turmas
                 .Include(s => s.Escola)
-                .FirstOrDefaultAsync(p => p.Id == id);
+                .Where(p => p.EscolaId == id)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }

@@ -6,6 +6,6 @@ namespace SchoolManager.Business.Interfaces
 {
     public interface IEscolaRepository : IRepository<Escola>
     {
-        Task<ICollection<Escola>> ObterEscolasTurmas();
+        Task<IEnumerable<Escola>> ObterEscolasTurmas();
     }
 }
