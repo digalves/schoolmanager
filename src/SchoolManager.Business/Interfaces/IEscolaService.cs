@@ -7,6 +7,5 @@ namespace SchoolManager.Business.Interfaces
     public interface IEscolaService
     {
         Task<Escola> Adicionar(Escola escola);
-        Task<IEnumerable<Escola>> ListarTodas();
     }
 }
