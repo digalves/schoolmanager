@@ -1,12 +1,11 @@
 using AutoMapper;
-using DevIO.Api.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SchoolManager.Data.Context;
+using SchoolManager.API.Configuration;
 
 namespace SchoolManager.API
 {
@@ -28,51 +27,23 @@ namespace SchoolManager.API
             }
 
             Configuration = builder.Build();
-
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddDbContext<SchoolManagerDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("schoolmanager"));
-            });
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("Development",
-                    builder => builder.AllowAnyOrigin()
-                                      .AllowAnyMethod()
-                                      .AllowAnyHeader());
-            });
-
             services.AddAutoMapper(typeof(Startup));
 
             services.ResolveDependencies();
 
-            services.AddControllers();
+            services.AddApiConfiguration(Configuration);
+
+            services.AddSwaggerConfig();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseCors("Development");
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseApiConfiguration(env);
         }
     }
 }

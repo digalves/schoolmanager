@@ -10,7 +10,7 @@ namespace SchoolManager.Test.Fixtures
     public class TestContext
     {
         public HttpClient Client { get; set; }
-        private TestServer _server;
+        private readonly TestServer _server;
 
         public TestContext()
         {

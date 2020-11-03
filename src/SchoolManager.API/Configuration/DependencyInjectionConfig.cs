@@ -5,7 +5,7 @@ using SchoolManager.Business.Notifications;
 using SchoolManager.Business.Services;
 using SchoolManager.Data.Repositories;
 
-namespace DevIO.Api.Configuration
+namespace SchoolManager.API.Configuration
 {
     public static class DependencyInjectionConfig
     {

@@ -23,12 +23,6 @@ namespace SchoolManager.API.Controllers
             _escolaRepository = escolaRepository;
         }
 
-        [HttpGet("start")]
-        public ActionResult Start()
-        {
-            return Ok("School Manager API");
-        }
-
         [HttpPost]
         public async Task<ActionResult<EscolaResponseViewModel>> Add(EscolaViewModel escolaViewModel)
         {
